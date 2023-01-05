@@ -80,7 +80,7 @@ type Codecs []Codec
 func (codecs Codecs) Merge() Codec {
 	var c = codecs[0]
 	for _, n := range codecs[1:] {
-		c.chain(n)
+		c = c.chain(n)
 	}
 	return c
 }
