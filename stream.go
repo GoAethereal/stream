@@ -150,7 +150,7 @@ func (cfg Network) Client(ctx cancel.Context) Executor {
 		default:
 			if con == nil {
 				if con, err = net.DialTimeout(cfg.Protocol, cfg.Endpoint, cfg.Timeout); err != nil {
-					return err
+					return Error{Status: Terminated, Cause: err}
 				}
 			}
 			return cmd(wrap(con.Read, con.SetReadDeadline), wrap(con.Write, con.SetWriteDeadline))
